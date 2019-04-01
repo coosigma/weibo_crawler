@@ -1,0 +1,5 @@
+{
+    "uids" : "uids.txt", 
+    "log" : "run.log", 
+    "output_path" : "Data/"
+}
