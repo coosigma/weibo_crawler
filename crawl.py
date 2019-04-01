@@ -118,6 +118,7 @@ if __name__ == '__main__':
     # S3: Treat uids
     for uid in spider.uids:
         print("start to treat uid:", uid)
+        log.write("start to treat uid: %s\n"%uid)
         spider.uid = uid
         # 3.0
         spider.make_output_handles()
