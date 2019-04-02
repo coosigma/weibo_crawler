@@ -25,7 +25,7 @@ class parser(object):
         div = soup.find("script", text=re.compile(r'"ns":"pl.content.homeFeed.index","domid":"Pl_Official_MyProfileFeed__22"'))
         if not div:
             print("unsuccess in weibo page")
-            return {'success': is_success, 'text': html, 'has_next' : False}
+            return {'success': is_success, 'text': html, 'has_next' : False, 'error': 'no weibo card div in weibo page'}
         html = parser.clear_html_in_script(div.text)
         return parser.parse_weibo(html)
 
@@ -38,7 +38,7 @@ class parser(object):
             html = res_json['data']
         except:
             print("unsuccess in weibo ajax")
-            return {'success': is_success, 'text': text, 'has_next' : False}
+            return {'success': is_success, 'text': text, 'has_next' : False, 'error': 'no json data in weibo ajax'}
         return parser.parse_weibo(html)
 
     @staticmethod
@@ -62,7 +62,7 @@ class parser(object):
                 text_div = div.find("div", {'class': 'WB_text W_f14'})
                 wb.message = re.sub(r'\s+', '', text_div.text)
                 # get handle
-                handle_div = div.find("div", {'class': 'WB_handle'})
+                handle_div = div.find("div", {'class': re.compile(r'WB_handle.*')})
                 li = handle_div.find_all("li")
                 wb.shares = parser.get_num(li[1].text)
                 wb.comments = parser.get_num(li[2].text)

@@ -8,7 +8,7 @@ class WeiboSpider(object):
     IOHandle = {}
     uids = set()
     uid = None
-    sleep_time = (600)
+    sleep_time = 300
     def __init__(self, downloader):
         self.downloader = downloader
         handle = self.IOHandle
@@ -89,7 +89,7 @@ class WeiboSpider(object):
             for wb in res['wbs']:
                 wb.write_to_file(self.IOHandle['output_json'])
             for rj in res['rejected']:
-                rejected_text = "rejected url: %s\nreason: %s\nhtml:%s\n" % (url, rj['error'], rj['html'])
+                rejected_text = "rejected url: %s\nreason: %s\nhtml:\n%s\n" % (url, rj['error'], rj['html'])
                 self.IOHandle['output_rejected'].write(rejected_text)
         else:
             error_text = "uid: %s cannot get data at url: %s\n%s" % (self.uid, url, res['text'])
@@ -154,9 +154,9 @@ if __name__ == '__main__':
             time.sleep(sleep_time)
             if aj2_res['has_next']:
                 page += 1
-                if page > 30:
+                if page > 50:
                     t = spider.sleep_time
-                    print("pages over 30, start to sleep for %s''\n"%t)
+                    print("pages over 30, start to sleep for %s"%t)
                     time.sleep(t)
                     print("Woke up, continue crawl...")
             else:
