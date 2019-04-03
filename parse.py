@@ -62,7 +62,8 @@ class parser(object):
                 text_div = div.find("div", {'class': 'WB_text W_f14'})
                 wb.message = re.sub(r'\s+', '', text_div.text)
                 # get handle
-                handle_div = div.find("div", {'class': re.compile(r'WB_handle.*')})
+                feed_div = div.find("div", {'class': re.compile(r'WB_feed_handle.*')})
+                handle_div = feed_div.find("div", {'class': re.compile(r'WB_handle.*')})
                 li = handle_div.find_all("li")
                 wb.shares = parser.get_num(li[1].text)
                 wb.comments = parser.get_num(li[2].text)
