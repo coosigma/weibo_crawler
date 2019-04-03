@@ -101,6 +101,8 @@ if __name__ == '__main__':
     ajax_url = "https://www.weibo.com/p/aj/v6/mblog/mbloglist?ajwvr=6&domain=%s&is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=%s&pagebar=%s&pl_name=Pl_Official_MyProfileFeed__22&id=%s&pre_page=%s"
     # url = ajax_url % (domain_id, page, page_bar, page_id)
     sleep_time = 0.1
+    page_limit = 50
+    max_pages = 100
 
     # S1: Get cookie
     print('Get logined cookie...')
@@ -154,9 +156,9 @@ if __name__ == '__main__':
             time.sleep(sleep_time)
             if aj2_res['has_next']:
                 page += 1
-                if page > 50:
+                if (page-1) % page_limit == (page_limit - 1):
                     t = spider.sleep_time
-                    print("pages over 30, start to sleep for %s"%t)
+                    print("pages over %s, start to sleep for %s"%(page_limit,t))
                     time.sleep(t)
                     print("Woke up, continue crawl...")
             else:
