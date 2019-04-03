@@ -158,7 +158,7 @@ if __name__ == '__main__':
                 page += 1
                 if (page-1) % page_limit == (page_limit - 1):
                     t = spider.sleep_time
-                    print("pages over %s, start to sleep for %s"%(page_limit,t))
+                    print("pages reached %s, start to sleep for %s"%(page_limit,t))
                     time.sleep(t)
                     print("Woke up, continue crawl...")
             else:
