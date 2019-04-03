@@ -2,6 +2,6 @@
 *.log
 Data/*
 login.cookie
-log*
+log
 test*
 __pycache__
