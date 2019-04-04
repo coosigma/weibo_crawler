@@ -36,6 +36,8 @@ class parser(object):
             res_json = json.loads(text)
             html = res_json['data']
         except:
+            if re.search(r'\"data\"\:\"', text):
+                return {'reaction': 'retry'}
             print("unsuccess in weibo ajax")
             return {'success': is_success, 'text': text, 'has_next' : False, 'error': 'no json data in weibo ajax'}
         return parser.parse_weibo(html)

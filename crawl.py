@@ -80,6 +80,10 @@ class WeiboSpider(object):
             return self.crawl(base_url, paras, parser, writer)
         else:
             res = parser(response)
+            if res.has_key('reaction') and res['reaction'] == 'retry':
+                print("Ajax json is broken, I will sleep for 1' and retry...")
+                time.sleep(60)
+                self.crawl(base_url, paras, parser, writer)
             if writer:
                 writer(res, url)
             return res
