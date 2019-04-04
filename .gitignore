@@ -6,3 +6,5 @@ login.cookie
 log
 test*
 __pycache__
+debug*
+rejected.txt
