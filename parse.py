@@ -26,8 +26,7 @@ class parser(object):
         if not div:
             print("unsuccess in weibo page")
             return {'success': is_success, 'text': html, 'has_next' : False, 'error': 'no weibo card div in weibo page'}
-        html = parser.clear_html_in_script(div.text)
-        return parser.parse_weibo(html)
+        return parser.parse_weibo(div.text)
 
     @staticmethod
     def parse_weibo_ajax(response):
@@ -43,6 +42,7 @@ class parser(object):
 
     @staticmethod
     def parse_weibo(html):
+        html = parser.clear_html_in_script(html)
         soup = BeautifulSoup(html, 'lxml')
         has_next = soup.find("a", {'class': 'page next S_txt1 S_line1'})
         #divs = soup.find_all("div", {'class': 'WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like'})
@@ -74,7 +74,7 @@ class parser(object):
                 wbs.append(wb)
         if not is_success:
             print("unsuccess in parse weibo")
-        return {'success': is_success, 'wbs': wbs, 'rejected': rejected, 'has_next': has_next, 'text': html}
+        return {'success': is_success, 'wbs': wbs, 'rejected': rejected, 'has_next': has_next, 'text': html, 'error' : 'Cannot find divs'}
 
     @staticmethod
     def get_num(str):

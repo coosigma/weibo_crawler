@@ -92,7 +92,7 @@ class WeiboSpider(object):
                 rejected_text = "rejected url: %s\nreason: %s\nhtml:\n%s\n" % (url, rj['error'], rj['html'])
                 self.IOHandle['output_rejected'].write(rejected_text)
         else:
-            error_text = "uid: %s cannot get data at url: %s\n%s" % (self.uid, url, res['text'])
+            error_text = "uid: %s cannot get data at url: %s\nError:%s\n%s" % (self.uid, url, res['error'], res['text'])
             self.IOHandle['output_rejected'].write(error_text)
 
 if __name__ == '__main__':
