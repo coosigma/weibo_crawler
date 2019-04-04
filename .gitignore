@@ -1,6 +1,7 @@
 *~
 *.log
 Data/*
+Data_*
 login.cookie
 log
 test*
