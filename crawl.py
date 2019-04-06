@@ -6,7 +6,7 @@ from parse import parser
 class WeiboSpider(object):
     conf = {}
     IOHandle = {}
-    uids = set()
+    uids = []
     uid = None
     sleep_time = 300
     def __init__(self, downloader):
@@ -49,8 +49,11 @@ class WeiboSpider(object):
 
     def read_uids(self):
         fh = self.IOHandle['uid']
+        tmp = set()
         with fh as f:
-            self.uids.update([re.search(r'(\d+)', i).expand(r'\1') for i in f.readlines()])
+            tmp.update([re.search(r'(\d+)', i).expand(r'\1') for i in f.readlines()])
+        self.uids = list(tmp)
+        self.uids.sort
 
     def make_output_handles(self):
         uid = self.uid
