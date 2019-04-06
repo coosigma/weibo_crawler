@@ -1,5 +1,5 @@
 {
-    "uids" : "uids.txt", 
+    "uids" : "uids/aa", 
     "log" : "run.log", 
     "output_path" : "Data/"
 }

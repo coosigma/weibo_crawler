@@ -1,8 +1,9 @@
 import re, json, sys
 
 data = []
-with open('test_data.json', 'r') as f:
-    line = f.readline()
-    data.append(json.loads(line))
+with open(sys.argv[1], 'r') as f:
+    for line in f:
+        data.append(json.loads(line))
 
-print(data[0])
+for e in data:
+    print(e)
