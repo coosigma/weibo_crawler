@@ -50,7 +50,6 @@ class WeiboSpider(object):
     def read_uids(self):
         fh = self.IOHandle['uid']
         with fh as f:
-            #self.uids.update([re.match(r'(\w+)\t(\d+)', i).expand(r'\2') for i in f.readlines()])
             self.uids.update([re.search(r'(\d+)', i).expand(r'\1') for i in f.readlines()])
 
     def make_output_handles(self):
