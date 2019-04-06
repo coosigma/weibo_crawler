@@ -22,7 +22,7 @@ class parser(object):
         is_success = False
         html = response.text
         soup = BeautifulSoup(html, 'lxml')
-        div = soup.find("script", text=re.compile(r'"ns":"pl.content.homeFeed.index","domid":"Pl_Official_MyProfileFeed"'))
+        div = soup.find("script", text=re.compile(r'"ns":"pl.content.homeFeed.index","domid":"Pl_Official_MyProfileFeed'))
         if not div:
             print("unsuccess in weibo page")
             return {'success': is_success, 'text': html, 'has_next' : False, 'error': 'no weibo card div in weibo page'}
